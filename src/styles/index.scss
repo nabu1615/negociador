@@ -464,7 +464,7 @@ blockquote {
 
     @media only screen and (min-width: 900px) {
       grid-gap: 20px;
-      grid-template-columns: repeat(4, calc(25% - 15px));
+      grid-template-columns: repeat(3, calc(33.3% - 15px));
     }
   }
 }
@@ -486,14 +486,6 @@ blockquote {
     }
 
     &:hover {
-      .card__item-cover {
-        display: none;
-      }
-
-      .card__item-back {
-        display: block;
-      }
-
       .card__item-cta {
         color: white;
       }
@@ -539,8 +531,7 @@ blockquote {
   }
 
   &__item-image,
-  &__item-cover,
-  &__item-back {
+  &__item-cover {
     width: 100%;
     grid-column: 1/-1;
     grid-row: 1;
@@ -548,13 +539,8 @@ blockquote {
     position: relative;
   }
 
-  &__item-cover,
-  &__item-back {
+  &__item-cover {
     z-index: 2;
-  }
-
-  &__item-back {
-    display: none;
   }
 
   &__item-cta {
