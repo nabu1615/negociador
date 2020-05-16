@@ -132,9 +132,24 @@ blockquote {
 }
 
 .hero {
-  height: 80vh;
+  height: 55vh;
   display: grid;
   grid-template-columns: repeat(2, 50%);
+
+  @media only screen and (min-width: 600px) {
+    height: 80vh;
+  }
+
+  &__price {
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 13px;
+      padding-left: 10px;
+    }
+  }
 
   &__title,
   &__copy,
@@ -160,7 +175,21 @@ blockquote {
     grid-row: 1;
     grid-column: 1/-1;
     text-align: center;
-    margin-top: 60px;
+
+    &--desktop {
+      display: none;
+      margin-top: 60px;
+
+      @media only screen and (min-width: 600px) {
+        display: block;
+      }
+    }
+
+    &--mobile {
+      @media only screen and (min-width: 600px) {
+        display: none;
+      }
+    }
 
     @media only screen and (min-width: 600px) {
       grid-column: 1;
@@ -173,8 +202,8 @@ blockquote {
     background: rgb(48, 83, 158);
     background: linear-gradient(
       90deg,
-      rgba(48, 83, 158, 0.5) 0%,
-      rgba(43, 48, 104, 0.5) 100%
+      rgba(#3258a4, 0.8) 0%,
+      rgba(#28295c, 0.8) 100%
     );
     display: flex;
     grid-row: 1;
@@ -250,6 +279,10 @@ blockquote {
     color: $gray-light;
     line-height: 1.6;
     margin-bottom: 5px;
+
+    @media only screen and (min-width: 600px) {
+      -webkit-line-clamp: 2;
+    }
   }
 
   &__input:focus ~ label {
@@ -260,8 +293,8 @@ blockquote {
     -webkit-line-clamp: unset;
   }
 
-  &__input:checked ~ label img {
-    transform: rotate(-90deg);
+  &__input:checked ~ label i {
+    transform: rotate(-180deg);
   }
 
   &__button {
@@ -269,11 +302,6 @@ blockquote {
     justify-content: right;
     padding: 0 20px;
     opacity: 0.3;
-    img {
-      width: 20px;
-      height: 20px;
-      transform: rotate(90deg);
-    }
   }
 }
 
@@ -287,18 +315,7 @@ blockquote {
   max-width: 120ch;
   position: relative;
   overflow: hidden;
-
-  &:before {
-    content: "";
-    background-color: $primary-color;
-    width: 300px;
-    height: 300px;
-    border-radius: 100%;
-    right: -5%;
-    bottom: -20%;
-    opacity: 0.2;
-    position: absolute;
-  }
+  align-items: center;
 
   @media only screen and (min-width: 600px) {
     padding: 0 0 0 50px;
@@ -315,7 +332,7 @@ blockquote {
     }
 
     &__content {
-      padding: 80px 30px 80px 0;
+      padding: 80px 60px 80px 0;
     }
   }
 
@@ -336,10 +353,12 @@ blockquote {
 
   &__preview {
     position: relative;
+    min-height: 520px;
 
     img {
       width: 100%;
       height: 100%;
+      min-height: 520px;
       filter: blur(3px);
       object-fit: cover;
     }
@@ -373,13 +392,16 @@ blockquote {
       opacity: 0.5;
     }
 
-    i {
-      font-size: 4em;
-      color: white;
+    img {
+      width: 60px;
+      height: 60px;
+      min-height: 0;
+      filter: none;
+      margin: 0 auto;
     }
 
     span {
-      color: white;
+      color: #5cbebc;
       font-weight: 900;
       font-size: 10px;
       text-transform: uppercase;
@@ -416,10 +438,13 @@ blockquote {
   &__price {
     color: $primary-color;
     font-weight: 500;
-    text-align: center;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
 
-    @media only screen and (min-width: 600px) {
-      text-align: left;
+    span {
+      font-size: 13px;
+      padding-left: 10px;
     }
   }
 
@@ -476,13 +501,15 @@ blockquote {
     position: relative;
     align-items: center;
     transition: all 0.5s;
+    min-height: 350px;
+    font-family: "Quicksand", sans-serif;
 
     &:after {
       content: "";
       width: 100%;
       height: 100%;
       position: absolute;
-      background-color: rgba($primary-color, 0.6);
+      background-color: rgba(#1d1d36, 0.8);
     }
 
     &:hover {
@@ -494,6 +521,10 @@ blockquote {
         background-color: rgba($primary-color, 0.8);
       }
     }
+  }
+
+  &__item-title {
+    font-size: 32px;
   }
 
   &__item-copy,
@@ -509,7 +540,8 @@ blockquote {
   &__item-name,
   &__item-description {
     color: white;
-    padding: 0 10px;
+    padding: 0 60px;
+    text-align: left;
   }
 
   &__item-duration,
@@ -541,6 +573,12 @@ blockquote {
 
   &__item-cover {
     z-index: 2;
+  }
+
+  &__item-image {
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
   }
 
   &__item-cta {
@@ -655,7 +693,7 @@ blockquote {
   }
 
   &__copy {
-    max-width: 50ch;
+    max-width: 60ch;
     margin: 0 auto;
     font-size: 14px;
     letter-spacing: 0.08em;
@@ -692,17 +730,18 @@ blockquote {
 
   button {
     cursor: pointer;
-    background-color: white;
+    background-color: $secondary-color;
     border: 0;
     height: 30px;
     font-family: "Quicksand", sans-serif;
-    color: $primary-color;
+    color: white;
     text-transform: uppercase;
     font-weight: 900;
     font-size: 12px;
     position: relative;
     right: 4px;
     width: 20%;
+    top: 1px;
 
     &:hover {
       opacity: 0.7;
@@ -739,6 +778,7 @@ blockquote {
     margin: 0;
     padding: 0;
     justify-content: center;
+    display: none !important;
 
     @media only screen and (min-width: 900px) {
       justify-content: flex-end;
@@ -769,7 +809,7 @@ blockquote {
     }
 
     li {
-      font-size: 14px;
+      font-size: 15px;
       margin-bottom: 10px;
 
       &:last-child {
